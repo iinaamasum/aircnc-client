@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto relative">
       <nav className="max-w-[1300px] px-3 md:px-6 mx-auto py-2">
         <div className="flex items-center justify-between">
           <div className="">
@@ -46,7 +46,11 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-      <div className={`${isOpen ? 'block w-full' : 'hidden'}`}>
+      <div
+        className={`navbar__animation__open absolute bg-[#fafafa] w-full pb-5 ${
+          isOpen ? 'block' : 'hidden'
+        }`}
+      >
         {navLinks.map(({ id, name, link }) => (
           <NavLink
             className="block w-full text-center font-semibold text-lg"

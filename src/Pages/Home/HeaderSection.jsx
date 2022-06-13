@@ -5,8 +5,8 @@ import PersonSelectionCard from './PersonSelectionCard';
 
 const HeaderSection = () => {
   return (
-    <section className="py-10 flex justify-between items-center">
-      <div className="w-1/3 pr-10">
+    <section className="py-10 md:flex justify-between items-center">
+      <div className="w-full md:w-1/3 md:pr-10">
         <form>
           <div className="w-full py-5 px-5 rounded-lg bg-white shadow-lg my-2">
             <label className="text-lg font-bold uppercase py-0 my-0">
@@ -43,7 +43,7 @@ const HeaderSection = () => {
           <PersonSelectionCard />
         </form>
       </div>
-      <div className="2/3">
+      <div className="w-full md:w-2/3">
         <div className="">
           <div className="flex justify-between items-center text-[14px] font-bold mb-3">
             <p className="text-lg">Experiences</p>
