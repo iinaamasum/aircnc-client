@@ -9,9 +9,20 @@ const Navbar = () => {
     { id: 3, name: 'Host Your Experience', link: '/experience' },
   ];
 
+  const [scrollY, setScrollY] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const handleScrollY = () => {
+    window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
+  };
+
+  window.addEventListener('scroll', handleScrollY);
+
   return (
-    <div className="container mx-auto relative">
+    <div
+      className={`${
+        scrollY ? 'bg-[#f1f1f1]' : 'bg-transparent'
+      } container mx-auto sticky top-0 z-50`}
+    >
       <nav className="max-w-[1300px] px-3 md:px-6 mx-auto py-2">
         <div className="flex items-center justify-between">
           <div className="">
@@ -60,6 +71,14 @@ const Navbar = () => {
             {name}
           </NavLink>
         ))}
+        <div className="grid grid-cols-2 gap-4 container px-3 my-1">
+          <button className="btn btn-outline btn-[#251D58] md:mr-3">
+            Login
+          </button>
+          <button className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide">
+            Register
+          </button>
+        </div>
       </div>
     </div>
   );
