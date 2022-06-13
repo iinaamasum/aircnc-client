@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { GrClose, GrMenu } from 'react-icons/gr';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -7,9 +8,11 @@ const Navbar = () => {
     { id: 2, name: 'Host Your Home', link: '/name' },
     { id: 3, name: 'Host Your Experience', link: '/experience' },
   ];
+
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="container md:px-6 px-3 mx-auto">
-      <nav className="max-w-[1300px] mx-auto py-2">
+    <div className="container mx-auto">
+      <nav className="max-w-[1300px] px-3 md:px-6 mx-auto py-2">
         <div className="flex items-center justify-between">
           <div className="">
             <Link className="text-4xl font-semibold" to="/">
@@ -35,12 +38,25 @@ const Navbar = () => {
               Register
             </button>
           </div>
-          <div className="visible lg:hidden">
-            <GrMenu />
-            <GrClose />
-          </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="visible lg:hidden bg-transparent"
+          >
+            {isOpen ? <GrClose size={25} /> : <GrMenu size={25} />}
+          </button>
         </div>
       </nav>
+      <div className={`${isOpen ? 'block w-full' : 'hidden'}`}>
+        {navLinks.map(({ id, name, link }) => (
+          <NavLink
+            className="block w-full text-center font-semibold text-lg"
+            to={link}
+            key={id}
+          >
+            {name}
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 };
