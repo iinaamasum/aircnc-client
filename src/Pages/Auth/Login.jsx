@@ -27,14 +27,24 @@ const Login = () => {
       }}
     >
       <Navbar text="text-gray-200" btnBg="btn-error" />
-      <div class="w-full md:w-1/2 flex items-center justify-end min-h-screen mx-auto container px-3 sm:px-6 md:px-10">
-        <div class="w-full shadow-2xl rounded-xl py-10 bg-[#FFF]">
+      <div class="w-full md:w-1/2 flex items-center justify-end h-[90vh] mx-auto container px-3 sm:px-6 md:px-10 text-white">
+        <div
+          // glassmorphism
+          style={{
+            background: 'rgba( 255, 255, 255, 0.1 )',
+            boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+            backdropFilter: 'blur( 3px )',
+          }}
+          class="w-full shadow-2xl rounded-xl py-10 bg-transparent"
+        >
           <h1 className="text-3xl font-semibold text-center mb-5">Login</h1>
           <div className="w-full px-3 sm:px-6 md:px-10">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div class="form-control">
                 <label class="label">
-                  <span class="label-text text-base font-semibold">Email</span>
+                  <span class="label-text text-base text-white font-semibold">
+                    Email
+                  </span>
                 </label>
                 <input
                   type="text"
@@ -68,7 +78,7 @@ const Login = () => {
               {/* password field */}
               <div class="form-control mb-1">
                 <label class="label">
-                  <span class="label-text text-base font-semibold">
+                  <span class="label-text text-base text-white font-semibold">
                     Password
                   </span>
                 </label>
@@ -105,7 +115,7 @@ const Login = () => {
                 <p>
                   Don't have an account?
                   <Link
-                    className="btn-link ml-1 text-blue-600 capitalize"
+                    className="btn-link ml-1 text-blue-400 capitalize"
                     to="/register"
                   >
                     Create Account Now
@@ -114,7 +124,7 @@ const Login = () => {
                 <p>
                   Forgot password?
                   <Link
-                    className="btn-link ml-1 text-blue-600 capitalize my-0"
+                    className="btn-link ml-1 text-blue-400 capitalize my-0"
                     to="/reset"
                   >
                     Click here to reset
@@ -122,14 +132,14 @@ const Login = () => {
                 </p>
               </div>
               <input
-                className="btn btn-dark w-full my-1 text-xl capitalize"
+                className="btn btn-accent w-full my-1 text-xl capitalize"
                 type="submit"
                 value="Login"
               />
             </form>
             <div class="divider">Social Login</div>
             <div className="">
-              <button className="btn btn-outline btn-dark w-full capitalize text-xl">
+              <button className="btn btn-outline btn-secondary w-full capitalize text-xl">
                 Continue With Google
               </button>
             </div>
