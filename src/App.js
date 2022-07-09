@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
+import UpdateProfile from './Pages/Auth/UpdateProfile';
 import Home from './Pages/Home/Home';
 import HostHome from './Pages/Home/HostHome';
 import ShareExperience from './Pages/Home/ShareExperience';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Home" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/updateProfile" element={<UpdateProfile />}></Route>
         <Route path="/hostHome" element={<HostHome />}></Route>
         <Route path="/experience" element={<ShareExperience />}></Route>
       </Routes>
