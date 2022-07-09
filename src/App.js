@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import UpdateProfile from './Pages/Auth/UpdateProfile';
+import Booking from './Pages/Booking/Booking';
 import Home from './Pages/Home/Home';
 import HostHome from './Pages/Home/HostHome';
 import ShareExperience from './Pages/Home/ShareExperience';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/updateProfile" element={<UpdateProfile />}></Route>
+        <Route path="/booking" element={<Booking />}></Route>
         <Route path="/hostHome" element={<HostHome />}></Route>
         <Route path="/experience" element={<ShareExperience />}></Route>
       </Routes>
