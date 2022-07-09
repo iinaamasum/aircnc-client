@@ -8,6 +8,7 @@ import UpdateProfile from './Pages/Auth/UpdateProfile';
 import Home from './Pages/Home/Home';
 import HostHome from './Pages/Home/HostHome';
 import ShareExperience from './Pages/Home/ShareExperience';
+import Footer from './Shared/Footer';
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/hostHome" element={<HostHome />}></Route>
         <Route path="/experience" element={<ShareExperience />}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  useAuthState,
-  useSignInWithEmailAndPassword,
-  useSignInWithGoogle,
-} from 'react-firebase-hooks/auth';
+import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init.js';
@@ -20,34 +16,35 @@ const UpdateProfile = () => {
     formState: { errors },
   } = useForm();
   const [user] = useAuthState(auth);
-  const [signInWithEmailAndPassword, userForm, loadingForm, errorForm] =
-    useSignInWithEmailAndPassword(auth);
-  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
-    useSignInWithGoogle(auth);
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
+
+  /**
+   *
+   * @param {*phone and image form} update later
+   */
 
   // functions
-  const handleGoogleSignIn = () => {
-    signInWithGoogle();
-  };
   const onSubmit = async (data) => {
+    const phoneNumber = Number(data.phone);
+    console.log(phoneNumber);
     try {
-      signInWithEmailAndPassword(data.email, data.password);
+      await updateProfile({
+        displayName: data.name,
+        phoneNumber,
+      });
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
   };
 
-  // useEffect(() => {
-  //   if (user || userForm || userGoogle) {
-  //     // navigate('/');
-  //   }
-  // }, [user, userForm, userGoogle, navigate]);
+  // console.log(user);
 
-  if (loadingForm || loadingGoogle) {
+  if (updating) {
     return <LoadingComponent />;
   }
 
-  if (errorForm || errorGoogle) {
+  if (error) {
     console.log('error');
   }
   return (
@@ -81,9 +78,9 @@ const UpdateProfile = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter Your Email"
+                  placeholder="Enter Your Name"
                   class="input input-bordered bg-[#F6F6F6] focus:outline-none font-medium tracking-wide text-black"
-                  {...register('email', {
+                  {...register('name', {
                     required: {
                       value: true,
                       message: 'Name is required!',
@@ -91,9 +88,9 @@ const UpdateProfile = () => {
                   })}
                 />
                 <label className="level font-bold">
-                  {errors.email?.type === 'required' && (
+                  {errors.name?.type === 'required' && (
                     <span className="label-text-alt text-red-500">
-                      {errors.email.message}
+                      {errors.phone.message}
                     </span>
                   )}
                 </label>
@@ -120,14 +117,14 @@ const UpdateProfile = () => {
                 <label className="level font-bold">
                   {errors.phone?.type === 'required' && (
                     <span className="label-text-alt text-red-500">
-                      {errors.password.message}
+                      {errors.phone.message}
                     </span>
                   )}
                 </label>
               </div>
 
               <input
-                className="btn btn-accent w-full my-1 text-xl capitalize"
+                className="btn btn-accent w-full mt-5 text-xl capitalize"
                 type="submit"
                 value="Update Info"
               />
