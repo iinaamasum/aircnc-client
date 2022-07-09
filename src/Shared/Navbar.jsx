@@ -34,7 +34,7 @@ const Navbar = ({ text, btnBg }) => {
           <div className="hidden lg:flex">
             {navLinks.map(({ id, name, link }) => (
               <NavLink
-                className={`text-md font-semibold mx-4 hover:text-gray-500 ${
+                className={`text-md font-semibold mx-4 hover:text-gray-500 transition-all duration-100 ease-linear ${
                   scrollY ? 'text-black' : text
                 }`}
                 key={id}
