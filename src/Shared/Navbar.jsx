@@ -1,6 +1,9 @@
+import { signOut } from 'firebase/auth';
 import { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { GrClose, GrMenu } from 'react-icons/gr';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import auth from '../firebase.init';
 
 const Navbar = ({ text, btnBg }) => {
   const navLinks = [
@@ -9,12 +12,15 @@ const Navbar = ({ text, btnBg }) => {
     { id: 3, name: 'Share Your Experience', link: '/experience' },
   ];
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
   const [scrollY, setScrollY] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const handleScrollY = () => {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
   };
+
+  console.log(user);
 
   window.addEventListener('scroll', handleScrollY);
 
@@ -45,18 +51,31 @@ const Navbar = ({ text, btnBg }) => {
             ))}
           </div>
           <div className="hidden lg:flex">
-            <button
-              onClick={() => navigate('/login')}
-              className={`btn btn-outline md:mr-3 ${btnBg}`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => navigate('/register')}
-              className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide"
-            >
-              Register
-            </button>
+            {user ? (
+              <>
+                <button
+                  onClick={() => signOut(auth)}
+                  className={`btn btn-outline md:mr-3 ${btnBg}`}
+                >
+                  LogOut
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate('/login')}
+                  className={`btn btn-outline md:mr-3 ${btnBg}`}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => navigate('/register')}
+                  className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide"
+                >
+                  Register
+                </button>
+              </>
+            )}
           </div>
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -80,20 +99,33 @@ const Navbar = ({ text, btnBg }) => {
             {name}
           </NavLink>
         ))}
-        <div className="grid grid-cols-2 gap-4 container px-3 my-1">
-          <button
-            onClick={() => navigate('/login')}
-            className={`btn btn-outline md:mr-3 ${btnBg}`}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => navigate('/register')}
-            className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide"
-          >
-            Register
-          </button>
-        </div>
+        <>
+          {user ? (
+            <div className="container mx-auto px-6">
+              <button
+                onClick={() => signOut(auth)}
+                className={`btn btn-outline md:mr-3 w-full ${btnBg}`}
+              >
+                LogOut
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-4 container px-3 my-1">
+              <button
+                onClick={() => navigate('/login')}
+                className={`btn btn-outline md:mr-3 ${btnBg}`}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => navigate('/register')}
+                className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide"
+              >
+                Register
+              </button>
+            </div>
+          )}
+        </>
       </div>
     </div>
   );

@@ -1,22 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init.js';
 import login_bg from '../../images/login_bg.png';
+import LoadingComponent from '../../Shared/LoadingComponent.jsx';
 import Navbar from '../../Shared/Navbar';
 
 const Login = () => {
+  // variables and imports
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data) => {
-    // console.log(data);
-    try {
-      console.log(data.email, data.password);
-    } catch (err) {}
+  const [user] = useAuthState(auth);
+  const [signInWithEmailAndPassword, userForm, loadingForm, errorForm] =
+    useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+
+  // functions
+  const handleGoogleSignIn = () => {
+    signInWithGoogle();
   };
+  const onSubmit = async (data) => {
+    try {
+      signInWithEmailAndPassword(data.email, data.password);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (user || userForm || userGoogle) {
+      navigate('/');
+    }
+  }, [user, userForm, userGoogle, navigate]);
+
+  if (loadingForm || loadingGoogle) {
+    return <LoadingComponent />;
+  }
+
+  if (errorForm || errorGoogle) {
+    console.log('error');
+  }
+
   return (
     <section
       style={{
@@ -49,7 +84,7 @@ const Login = () => {
                 <input
                   type="text"
                   placeholder="Enter Your Email"
-                  class="input input-bordered bg-[#F6F6F6] focus:outline-none font-medium tracking-wide"
+                  class="input input-bordered bg-[#F6F6F6] focus:outline-none font-medium tracking-wide text-black"
                   {...register('email', {
                     required: {
                       value: true,
@@ -85,7 +120,7 @@ const Login = () => {
                 <input
                   type="text"
                   placeholder="Enter Your Password"
-                  class="input input-bordered bg-[#F6F6F6] focus:outline-none font-medium tracking-wide"
+                  class="input input-bordered bg-[#F6F6F6] focus:outline-none font-medium tracking-wide text-black"
                   {...register('password', {
                     required: {
                       value: true,
@@ -139,7 +174,10 @@ const Login = () => {
             </form>
             <div class="divider">Social Login</div>
             <div className="">
-              <button className="btn btn-outline btn-secondary w-full capitalize text-xl">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn btn-outline btn-secondary w-full capitalize text-xl"
+              >
                 Continue With Google
               </button>
             </div>
