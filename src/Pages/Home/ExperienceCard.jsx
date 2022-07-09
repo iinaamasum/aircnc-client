@@ -19,19 +19,19 @@ const ExperienceCard = () => {
               type="radio"
               name="rating-1"
               class="mask mask-star h-4 w-4 bg-orange-500"
-              checked
+              //checked
             />
             <input
               type="radio"
               name="rating-1"
               class="mask mask-star h-4 w-4 bg-orange-500"
-              checked
+              //checked
             />
             <input
               type="radio"
               name="rating-1"
               class="mask mask-star h-4 w-4 bg-orange-500"
-              checked
+              //checked
             />
             <input
               type="radio"

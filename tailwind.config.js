@@ -11,7 +11,7 @@ module.exports = {
           secondary: '#f6d860', // secondary color
           accent: '#37cdbe', // accent color
           neutral: '#3d4451',
-          'base-100': '#ffffff',
+          'base-100': '#f7f7f7',
         },
       },
       // 'dark',

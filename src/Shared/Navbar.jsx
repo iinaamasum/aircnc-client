@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { GrClose, GrMenu } from 'react-icons/gr';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ text, btnBg }) => {
   const navLinks = [
     { id: 1, name: 'Home', link: '/' },
-    { id: 2, name: 'Host Your Home', link: '/name' },
-    { id: 3, name: 'Host Your Experience', link: '/experience' },
+    { id: 2, name: 'Host Your Home', link: '/hostHome' },
+    { id: 3, name: 'Share Your Experience', link: '/experience' },
   ];
+  const navigate = useNavigate();
 
   const [scrollY, setScrollY] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -27,13 +28,15 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="">
             <Link className="text-4xl font-semibold" to="/">
-              AirCnc
+              <span className="text-green-500">AirCnc</span>
             </Link>
           </div>
           <div className="hidden lg:flex">
             {navLinks.map(({ id, name, link }) => (
               <NavLink
-                className="text-md font-semibold mx-4 hover:text-gray-500"
+                className={`text-md font-semibold mx-4 hover:text-gray-500 ${
+                  scrollY ? 'text-black' : text
+                }`}
                 key={id}
                 to={link}
               >
@@ -42,10 +45,16 @@ const Navbar = () => {
             ))}
           </div>
           <div className="hidden lg:flex">
-            <button className="btn btn-outline btn-[#251D58] md:mr-3">
+            <button
+              onClick={() => navigate('/login')}
+              className={`btn btn-outline md:mr-3 ${btnBg}`}
+            >
               Login
             </button>
-            <button className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide">
+            <button
+              onClick={() => navigate('/register')}
+              className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide"
+            >
               Register
             </button>
           </div>
@@ -72,10 +81,16 @@ const Navbar = () => {
           </NavLink>
         ))}
         <div className="grid grid-cols-2 gap-4 container px-3 my-1">
-          <button className="btn btn-outline btn-[#251D58] md:mr-3">
+          <button
+            onClick={() => navigate('/login')}
+            className={`btn btn-outline md:mr-3 ${btnBg}`}
+          >
             Login
           </button>
-          <button className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide">
+          <button
+            onClick={() => navigate('/register')}
+            className="bg-[#251D58] btn hover:bg-[#0d082e] tracking-wide"
+          >
             Register
           </button>
         </div>

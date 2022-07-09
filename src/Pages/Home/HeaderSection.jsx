@@ -26,7 +26,7 @@ const HeaderSection = () => {
               <input
                 type="date"
                 className="w-full py-1 outline-none text-[14px] font-semibold"
-                value={new Date().toISOString().split('T')[0]}
+                defaultValue={new Date().toISOString().split('T')[0]}
               />
             </div>
             <div className="w-full py-5 px-5 rounded-lg bg-white shadow-lg my-2 relative">
@@ -36,7 +36,7 @@ const HeaderSection = () => {
               <input
                 type="date"
                 className="w-full py-1 outline-none text-[14px] font-semibold relative"
-                value={new Date().toISOString().split('T')[0]}
+                defaultValue={new Date().toISOString().split('T')[0]}
               />
             </div>
           </div>
