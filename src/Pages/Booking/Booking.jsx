@@ -108,8 +108,9 @@ const Booking = () => {
                 <div className="">
                   <div className="mb-2">
                     <p className="font-bold text-slate-900">Dates</p>
-                    <div className="text-orange-500 font-semibold border-[1px] border-slate-400 flex items-center justify-between px-5 py-1 rounded-lg">
-                      <p>10/11/2022</p> <BsArrowRight size={25} />
+                    <div className="text-orange-500 font-semibold border-[1px] border-slate-400 flex items-center justify-between px-5 py-1 rounded-lg relative">
+                      <p>10/11/2022</p>{' '}
+                      <BsArrowRight size={25} className="absolute left-[50%]" />
                       <p>12/11/2022</p>
                     </div>
                   </div>
@@ -125,41 +126,53 @@ const Booking = () => {
                       </select>
                     </div>
                     <div className="mt-4 px-2">
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between relative">
                         <p className="text-slate-600 font-medium">
                           $34 * 4 nights
                         </p>
-                        <BsArrowRight size={20} />
+                        <BsArrowRight
+                          size={20}
+                          className="absolute left-[50%]"
+                        />
                         <p className="text-orange-500 font-semibold text-lg">
                           $136
                         </p>
                       </div>
                       <div className="divider my-1"></div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between relative">
                         <p className="text-slate-600 font-medium">
                           Cleaning Fee
                         </p>
-                        <BsArrowRight size={20} />
+                        <BsArrowRight
+                          size={20}
+                          className="absolute left-[50%]"
+                        />
                         <p className="text-orange-500 font-semibold text-lg">
                           $20
                         </p>
                       </div>
                       <div className="divider my-1"></div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between relative">
                         <p className="text-slate-600 font-medium">
                           Service Cost
                         </p>
-                        <BsArrowRight size={20} />
+                        <BsArrowRight
+                          size={20}
+                          className="absolute left-[50%]"
+                        />
                         <p className="text-orange-500 font-semibold text-lg">
                           $30
                         </p>
                       </div>
                       <div className="divider my-1"></div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between relative">
                         <p className="text-slate-600 font-medium text-2xl">
                           Total
                         </p>
-                        <BsArrowRight size={20} />
+                        <BsArrowRight
+                          size={30}
+                          className="absolute left-[50%]"
+                        />
                         <p className="text-orange-500 font-semibold text-2xl">
                           $186
                         </p>
