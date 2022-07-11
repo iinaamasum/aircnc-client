@@ -5,21 +5,23 @@ import { GrTwitter } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const navLinks = [
+    { id: 1, name: 'Home', link: '/' },
+    { id: 2, name: 'Host Your Home', link: '/hostHome' },
+    { id: 3, name: 'Share Your Experience', link: '/experience' },
+  ];
   return (
     <footer class="footer footer-center p-10 bg-black text-white">
       <div class="grid grid-flow-col gap-4">
-        <Link to="/" class="cursor-pointer btn-link text-blue-500">
-          About us
-        </Link>
-        <Link to="/" class="cursor-pointer btn-link text-blue-500">
-          Contact
-        </Link>
-        <Link to="/" class="cursor-pointer btn-link text-blue-500">
-          Jobs
-        </Link>
-        <Link to="/" class="cursor-pointer btn-link text-blue-500">
-          Press kit
-        </Link>
+        {navLinks.map((links) => (
+          <Link
+            class="cursor-pointer btn-link text-blue-500"
+            key={links.id}
+            to={links.link}
+          >
+            {links.name}
+          </Link>
+        ))}
       </div>
       <div>
         <div class="grid grid-flow-col gap-2">
